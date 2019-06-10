@@ -37,7 +37,7 @@
                         <div class="searchBarContainer">
                            <input class="searchBox" type="text" name="term">
                            <button class="searchButton">
-                             <img src="assets/images/icon.png"
+                             <img src="assets/images/icon.png">
                            </button>
                        </div>
                       </form>
