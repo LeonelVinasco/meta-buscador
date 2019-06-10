@@ -3,6 +3,10 @@
 //Se importa la clase DomDocumentParser
 include("classes/DomDocumentParser.php");
 
+$alreadyCrawled = array();
+
+$crawling = array(); //Enlaces pendientes
+
 function createLink($src, $url) {
     $scheme= parse_url($url)["scheme"]; //http or HttpQueryString
     $host = parse_url($url)["host"]; // www.reecekenney.com
@@ -26,9 +30,38 @@ function createLink($src, $url) {
     return $src;
 }
 
+function getDetails($url){
+  $parser = new DomDocumentParser($url);
+  $titleArray = $parser->getTitleTags();
+
+  if(sizeof($titleArray) == 0 || $titleArray->item(0)== NULL){
+    return;
+  }
+
+  $title = $titleArray->item(0)->nodeValue;
+  $title = str_replace("\n", "", $title);
+
+  if($title == ""){
+    return;
+  }
+  echo "URL: $url, Title: $title<br>";
+}
+
+function getDescription($url){
+
+    $parser= new DomDocumentParser($url);
+    $descriptionArray=$parser->getDescriptionTags();
+
+    foreach($descriptionArray as $descrip){
+      echo "Description: $descrip";
+    }
+
+}
 
 function followLinks($url) {
     // Se crea un nuevo objeto. Recordar como funcionan las variables
+    global $alreadyCrawled;
+    global $crawling;
     $parser = new DomDocumentParser($url);
     $linkList = $parser->getlinks();
 
@@ -46,10 +79,25 @@ function followLinks($url) {
 
       $href= createLink($href,$url);
 
-      echo $href . "<br>";
+      if(!in_array($href, $alreadyCrawled)){
+        $alreadyCrawled[] = $href;
+        $crawling[]= $href;
+         getDetails($href);
+         //getDescription($href);
+        //insert $href
+      }
+      else return;
+
+       // echo $href . "<br>";
 
     }
+
+    array_shift($crawling);
+
+    foreach($crawling as $site){
+      followLinks($site);
+    }
 }
-$startUrl = "http://gentesdelcomun.com";
+$startUrl = "http://bbc.com";
 followLinks($startUrl);
  ?>
