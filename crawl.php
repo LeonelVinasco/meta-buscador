@@ -60,6 +60,7 @@ function getDetails($url){
   if($title == ""){
     return;
   }
+<<<<<<< HEAD
   $description= "";
   $keywords = "";
 
@@ -83,6 +84,21 @@ echo "beforeAdding";
   echo "added";
 }
 
+=======
+  echo "URL: $url, Title: $title<br>";
+}
+
+function getDescription($url){
+
+    $parser= new DomDocumentParser($url);
+    $descriptionArray=$parser->getDescriptionTags();
+
+    foreach($descriptionArray as $descrip){
+      echo "Description: $descrip";
+    }
+
+}
+>>>>>>> d5fa8cccd2daeebbd1b0ae5fb7a9fbfe5c6e8fc2
 
 function followLinks($url) {
     // Se crea un nuevo objeto. Recordar como funcionan las variables
@@ -115,17 +131,7 @@ function followLinks($url) {
       else return;
 
        // echo $href . "<br>";
-    //    CREATE TABLE sites(
-    //        -> id INT NOT NULL AUTO_INCREMENT,
-    //        -> url VARCHAR(512) NOT NULL,
-    //        -> title VARCHAR(512) NOT NULL,
-    //        -> description VARCHAR(512) NOT NULL,
-    //        -> keywords VARCHAR(512) NOT NULL,
-    //        -> clicks INT,
-    //        -> PRIMARY KEY (id)
-    //        -> ) ENGINE=INNODB;
-    //
-     }
+<<<<<<< HEAD
 
     array_shift($crawling);
 
