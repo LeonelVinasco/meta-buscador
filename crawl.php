@@ -7,7 +7,7 @@ $alreadyCrawled = array();
 $crawling = array(); //Enlaces pendientes
 
 function insertLink($url, $title, $description, $keywords){
-  echo "Adding";
+
   global $con; //Se hace referencia a la variable con del archivo config.php
 
   $query= $con->prepare("INSERT INTO sites (url, title, description, keywords)
@@ -78,9 +78,9 @@ function getDetails($url){
   $keywords = str_replace("\n", "", $keywords);
 
   echo "URL: $url, Title: $title, Description: $description, Keywords: $keywords<br>";
-echo "beforeAdding";
+
   insertLink($url,$title,$description,$keywords);
-  echo "added";
+  
 }
 
 

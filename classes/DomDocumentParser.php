@@ -21,16 +21,8 @@ class DomDocumentParser {
   public function getTitleTags(){
     return $this->doc->getElementsByTagName("title");
   }
-<<<<<<< HEAD
   public function getMetaTags(){
     return $this->doc->getElementsByTagName("meta");
-=======
-  public function getDescriptionTags(){
-    return $this->doc->getElementsByTagName("description");
-  }
-  public function getKeyWordsTags(){
-    return $this->doc->getElementsByTagName("keywords");
->>>>>>> d5fa8cccd2daeebbd1b0ae5fb7a9fbfe5c6e8fc2
   }
 
 }
